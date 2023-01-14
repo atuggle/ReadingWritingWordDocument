@@ -11,9 +11,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        // TODO: pull the below two variables in from args
         // Set the path to the Word document and the output.txt file
-        string templateFile = @"C:\Users\allen\code\scratch\ReadingWritingWordDocument\Template1.docx";
-        var saleItemFile = $@"C:\Users\allen\code\scratch\ReadingWritingWordDocument\output.txt";
+        var templateFile = @"C:\Users\allen\code\scratch\ReadingWritingWordDocument\Template1.docx";
+        var saleItemFile = @"C:\Users\allen\code\scratch\ReadingWritingWordDocument\output.txt";
 
         try
         {
@@ -70,6 +71,7 @@ class Program
             EnsureFolderExists(outputFolder);
 
             var newFileName = $@"{outputFolder}{Path.DirectorySeparatorChar}{saleItem.Name}.docx";
+            RemoveFileIfExists(newFileName);
             using (WordprocessingDocument newWordDoc = WordprocessingDocument.Create(newFileName, WordprocessingDocumentType.Document))
             {
                 // Add the main document part to the new document
@@ -80,6 +82,14 @@ class Program
                     sw.Write(docText);
                 }
             }
+        }
+    }
+
+    private static void RemoveFileIfExists(string newFileName)
+    {
+        if (File.Exists(newFileName))
+        {
+            File.Delete(newFileName);
         }
     }
 
