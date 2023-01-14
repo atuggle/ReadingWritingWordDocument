@@ -1,5 +1,3 @@
-Name | Description | Price
 John|book|$10.00
 Jane|shirt|$25
 Smith|shoes|$60
-
